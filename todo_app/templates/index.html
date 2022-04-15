@@ -6,13 +6,42 @@
     <h1 class="display-4">To-Do App</h1>
     <p class="lead">Just another to-do app.</p>
   </div>
-
-  <div class="row">
-    <div class="col-md-12">
-      <h2>Items</h2>
-      <ul class="list-group mb-4">
-        <!-- List the todo items here -->
-      </ul>
+  
+  <div class="grid">
+    <div class="container">
+    	<form class="row g-3" action="/post" method="POST"> 
+				<div class="col-auto">
+          <input type="text" readonly class="form-control-plaintext" id="content" value="add task" name="title">
+        </div>
+        <div class="col-auto">
+          <input type="text" class="form-control" id="task" placeholder="enter title here">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary mb-3">save task</button>
+        </div>
+      </form>
+      <div class="row">
+        <table class="table">
+					<thead>
+          	<tr>
+            	<th scope="col">Title</th> 
+               <th scope="col">Completed</th>
+               <th scope="col">Update</th>
+               <th scope="col">Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+          	{% for task in tasks %}
+              <tr>
+                <td>{{ task.title }}</td>
+                 <td><button type="button" class="btn btn-success">Complete</button></td>
+                 <td><button type="button" class="btn btn-warning">Update</button></td>
+                 <td><a href="/delete/{{ task.id }}" class="btn btn-danger">Delete</a></td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 {% endblock %}
