@@ -69,7 +69,12 @@
         ExecStop=/home/ec2-user/.local/bin/poetry 
     become: yes
 
-
+  - name: Copy content into service file 
+    ansible.builtin.copy:
+      dest: "/opt/todoapp/.env"
+      src: "/opt/todapp/.env.template"
+      remote_src: true 
+    become: yes
 
   - name: Start TodoApp 
     ansible.builtin.systemd:
